@@ -2,21 +2,20 @@ import { Injectable } from '@nestjs/common';
 import { CreatePaymentInvoiceDto } from './dto/create-payment-invoice.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
 import { StarkbankService } from 'src/starkbank/starkbank.service';
-import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class PaymentsService {
   constructor(private starkBankService: StarkbankService) {}
 
   create(createPaymentDto: CreatePaymentInvoiceDto) {
-    this.starkBankService.createInvoice({
-      amount: createPaymentDto.amount,
-      name: `${createPaymentDto.firstName} ${createPaymentDto.lastName}`,
-      taxId: createPaymentDto.cpf,
-      orderId: uuidv4(),
-    });
+    try {
+      console.log(createPaymentDto);
+      this.starkBankService.createInvoice({});
 
-    return 'This action adds a new payment';
+      return 'This action adds a new payment';
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   findAll() {

@@ -16,7 +16,7 @@ import { UpdatePaymentDto } from './dto/update-payment.dto';
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
-  @Post('invoice')
+  @Post('invoice/:type')
   create(@Body() createPaymentDto: CreatePaymentInvoiceDto) {
     return this.paymentsService.create(createPaymentDto);
   }

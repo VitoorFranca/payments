@@ -7,6 +7,8 @@
 .env
 private-key.pem
 public-key.pem
+privateKey.pem
+publicKey.pem
 
 # Logs
 logs
