@@ -22,7 +22,7 @@ export class CreateBillet {
   amountInCents: number;
 
   @IsString()
-  tags: string[];
+  tags?: string;
 
   @IsDateString()
   scheduledDate: string;

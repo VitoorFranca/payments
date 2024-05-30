@@ -1,7 +1,6 @@
 import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { CPF } from '../valueObjects/cpf';
 import { CNPJ } from '../valueObjects/cnpj';
-import { BilletStatus } from '../enums/billet-status';
 import { IBillet } from '../interfaces/Billet';
 
 export class Billet {
@@ -25,11 +24,11 @@ export class Billet {
   @IsDateString()
   scheduled: string;
 
-  tags: string[];
+  tags: string;
 
   transactionIds: string[];
 
-  status: BilletStatus;
+  status: string;
 
   @IsNumber()
   amount: number;
