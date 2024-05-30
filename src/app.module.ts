@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PaymentsModule } from './payments/payments.module';
 import { StarkbankModule } from './starkbank/startbank.module';
-import { BilletModule } from './billet/billet.module';
+import { BilletModule } from './billets/billet.module';
 
 @Module({
   imports: [

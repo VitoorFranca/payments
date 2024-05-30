@@ -3,7 +3,7 @@ import { CreateBillet } from './dto/create-billet.dto';
 import { Billet } from './entities/billet';
 import { BilletService } from './services/billet.service';
 
-@Controller('billet')
+@Controller('billets')
 export class BilletController {
   constructor(
     @Inject('BilletService') private readonly billetService: BilletService,
