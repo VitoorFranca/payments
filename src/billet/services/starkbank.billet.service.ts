@@ -1,19 +1,22 @@
 import { CreateBillet } from '../dto/create-billet.dto';
+import { CreateStarkBankBillet } from '../dto/create-starkbank-billet.dto';
 import { Billet } from '../entities/billet';
-import { BilletStatus } from '../enums/billet-status';
-import { IBillet } from '../interfaces/Billet';
 import { BilletService } from './billet.service';
+import { boletoPayment } from 'starkbank';
 
 export class StarkbankBilletService extends BilletService {
   async create(createBilletDto: CreateBillet): Promise<Billet> {
-    const billet: IBillet = {
-      id: '1',
-      ...createBilletDto,
-      createdAt: new Date().toISOString(),
-      fee: 0,
-      status: BilletStatus.created,
-    };
-
-    return new Billet(billet);
+    try {
+      const createStarkBankBillet = new CreateStarkBankBillet(createBilletDto);
+      const [billet] = await boletoPayment.create([createStarkBankBillet]);
+      return new Billet({
+        ...billet,
+        amountInCents: billet.amount,
+        receiverIdentity: billet.taxId,
+        createdAt: billet.created,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }
