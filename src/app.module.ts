@@ -3,10 +3,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PaymentsModule } from './payments/payments.module';
 import { StarkbankModule } from './starkbank/startbank.module';
+import { BilletModule } from './billet/billet.module';
 
 @Module({
   imports: [
     PaymentsModule,
+    BilletModule,
     StarkbankModule.register({
       environment: process.env.STARKBANK_ENV,
       id: process.env.STARKBANK_ID,
