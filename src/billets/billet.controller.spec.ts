@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { BilletController } from './billet.controller';
-import { CreateBillet } from './dto/create-billet.dto';
+import { CreateBillet, CreateBilletInput } from './dto/create-billet.dto';
 import { Billet } from './entities/billet';
 import { IBillet } from './interfaces/Billet';
 import { BilletService } from './services/billet.service';
@@ -9,7 +9,7 @@ import { MockBilletBuilder } from './mock.billet.builder';
 class MockBilletService extends BilletService {
   async create(): Promise<Billet> {
     const mockBilletPayment: IBillet =
-      MockBilletBuilder.buildBillet().getBillet();
+      MockBilletBuilder.buildCreateBilletOutput().getBillet();
 
     return new Billet(mockBilletPayment);
   }
@@ -34,13 +34,15 @@ describe('BilletController', () => {
       jest.useFakeTimers({ now: new Date('2020-04-24T01:33:40.611174+00:00') });
       jest.spyOn(billetService, 'create');
 
-      const mockedBilletInput: CreateBillet =
-        MockBilletBuilder.buildCreateBilletDto().getBillet();
+      const mockedBilletInput: CreateBilletInput =
+        MockBilletBuilder.buildCreateBilletInput().getBillet();
 
       const result = await billetController.create(mockedBilletInput);
 
       expect(result).toBeInstanceOf(Billet);
-      expect(billetService.create).toHaveBeenCalledWith(mockedBilletInput);
+      expect(billetService.create).toHaveBeenCalledWith(
+        new CreateBillet(mockedBilletInput),
+      );
 
       jest.useRealTimers();
     });

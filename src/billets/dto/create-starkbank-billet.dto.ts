@@ -9,7 +9,7 @@ interface ICreateStarkBankBillet
 
 export class CreateStarkBankBillet implements ICreateStarkBankBillet {
   @IsNotEmpty()
-  taxId: Document;
+  taxId: string;
 
   @IsNumber()
   amount: number;
@@ -34,7 +34,7 @@ export class CreateStarkBankBillet implements ICreateStarkBankBillet {
 
   constructor(createBilletDto: CreateBillet) {
     this.amount = createBilletDto.amountInCents;
-    this.taxId = createBilletDto.receiverIdentity;
+    this.taxId = createBilletDto.receiverIdentity.getFormattedDocument();
     this.barCode = createBilletDto.barCode;
     this.line = createBilletDto.line;
     this.description = createBilletDto.description;

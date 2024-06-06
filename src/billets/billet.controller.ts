@@ -1,5 +1,5 @@
 import { Controller, Body, Post, Inject } from '@nestjs/common';
-import { CreateBillet } from './dto/create-billet.dto';
+import { CreateBillet, CreateBilletInput } from './dto/create-billet.dto';
 import { Billet } from './entities/billet';
 import { BilletService } from './services/billet.service';
 
@@ -10,7 +10,7 @@ export class BilletController {
   ) {}
 
   @Post()
-  async create(@Body() createBilletDto: CreateBillet): Promise<Billet> {
-    return this.billetService.create(createBilletDto);
+  async create(@Body() createBilletDto: CreateBilletInput): Promise<Billet> {
+    return this.billetService.create(new CreateBillet(createBilletDto));
   }
 }

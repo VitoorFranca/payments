@@ -1,6 +1,6 @@
 export interface IBillet {
   id: string;
-  receiverIdentity: Document;
+  receiverIdentity: string;
   description: string;
   line?: string;
   barCode?: string;

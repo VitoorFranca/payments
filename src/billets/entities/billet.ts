@@ -1,5 +1,6 @@
 import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { IBillet } from '../interfaces/Billet';
+import { Document } from '../valueObjects/document';
 
 export class Billet {
   @IsNotEmpty()
@@ -7,7 +8,7 @@ export class Billet {
   id: string;
 
   @IsNotEmpty()
-  receiverIdentity: Document;
+  receiverIdentity: string;
 
   @IsNotEmpty()
   @IsString()
@@ -58,7 +59,9 @@ export class Billet {
     this.description = description;
     this.fee = fee;
     this.line = line;
-    this.receiverIdentity = receiverIdentity;
+    this.receiverIdentity = new Document(
+      receiverIdentity,
+    ).getFormattedDocument();
     this.scheduled = scheduled;
     this.status = status;
     this.tags = tags;

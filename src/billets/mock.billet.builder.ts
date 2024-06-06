@@ -1,5 +1,6 @@
+import { CreateBillet } from './dto/create-billet.dto';
 import { CreateStarkBankBillet } from './dto/create-starkbank-billet.dto';
-
+import { cpf, cnpj } from 'cpf-cnpj-validator';
 export class MockBilletBuilder {
   static billet: any;
 
@@ -7,7 +8,7 @@ export class MockBilletBuilder {
     this.billet = {
       id: '12345',
       amount: 5000,
-      taxId: '12345678901',
+      taxId: cnpj.generate(),
       created: new Date().toISOString(),
       description: 'I am a mocked billet',
       scheduled: '',
@@ -21,10 +22,20 @@ export class MockBilletBuilder {
   }
 
   static buildCreateBilletDto() {
+    this.billet = new CreateBillet(this.buildCreateBilletInput().billet);
+    return this;
+  }
+
+  static buildCreateStarkBankBilletDto() {
+    this.billet = new CreateStarkBankBillet(this.buildCreateBilletDto().billet);
+    return this;
+  }
+
+  static buildCreateBilletInput() {
     this.billet = {
       line: '123454',
       barCode: '1234556',
-      receiverIdentity: '12345678901',
+      receiverIdentity: cpf.generate(),
       description: "I'm a mocked billet",
       amountInCents: 5000,
       tags: '',
@@ -34,12 +45,7 @@ export class MockBilletBuilder {
     return this;
   }
 
-  static buildCreateStarkBankBilletDto() {
-    this.billet = new CreateStarkBankBillet(this.buildCreateBilletDto().billet);
-    return this;
-  }
-
-  static buildBillet() {
+  static buildCreateBilletOutput() {
     this.billet = {
       ...this.buildStarkBankBilletResult().billet,
       receiverIdentity: this.billet.taxId,
