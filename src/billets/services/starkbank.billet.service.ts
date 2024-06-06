@@ -16,9 +16,6 @@ export class StarkbankBilletService extends BilletService {
         createdAt: billet.created,
       });
     } catch (error) {
-      console.log('DEU ERRO NO STARKBANK BILLET SERVICE');
-      console.log(error);
-
       return error;
     }
   }
