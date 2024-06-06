@@ -1,9 +1,6 @@
-import { CNPJ } from '../valueObjects/cnpj';
-import { CPF } from '../valueObjects/cpf';
-
 export interface IBillet {
   id: string;
-  receiverIdentity: CNPJ | CPF;
+  receiverIdentity: Document;
   description: string;
   line?: string;
   barCode?: string;

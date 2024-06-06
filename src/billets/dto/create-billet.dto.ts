@@ -1,6 +1,4 @@
 import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { CPF } from '../valueObjects/cpf';
-import { CNPJ } from '../valueObjects/cnpj';
 
 export class CreateBillet {
   @IsNotEmpty()
@@ -12,7 +10,7 @@ export class CreateBillet {
   barCode: string;
 
   @IsNotEmpty()
-  receiverIdentity: CPF | CNPJ;
+  receiverIdentity: Document;
 
   @IsNotEmpty()
   @IsString()

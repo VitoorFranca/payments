@@ -1,6 +1,4 @@
 import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { CPF } from '../valueObjects/cpf';
-import { CNPJ } from '../valueObjects/cnpj';
 import { CreateBillet } from './create-billet.dto';
 
 interface ICreateStarkBankBillet
@@ -11,7 +9,7 @@ interface ICreateStarkBankBillet
 
 export class CreateStarkBankBillet implements ICreateStarkBankBillet {
   @IsNotEmpty()
-  taxId: CPF | CNPJ;
+  taxId: Document;
 
   @IsNumber()
   amount: number;
