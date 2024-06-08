@@ -1,9 +1,12 @@
 import { Test } from '@nestjs/testing';
 import { BilletController } from './billet.controller';
-import { CreateBillet, CreateBilletInput } from './dto/create-billet.dto';
-import { Billet } from './entities/billet';
-import { IBillet } from './interfaces/Billet';
-import { BilletService } from './services/billet.service';
+import {
+  CreateBillet,
+  CreateBilletInput,
+} from '../domain/dto/create-billet.dto';
+import { Billet } from '../domain/entities/billet';
+import { IBillet } from '../domain/interfaces/Billet';
+import { BilletService } from '../domain/services/billet.service';
 import { MockBilletBuilder } from './mock.billet.builder';
 
 class MockBilletService extends BilletService {

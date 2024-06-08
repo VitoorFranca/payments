@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { BilletController } from './billet.controller';
-import { StarkbankBilletService } from './services/starkbank.billet.service';
+import { BilletController } from './infrastructure/billet.controller';
+import { StarkbankBilletService } from './infrastructure/services/starkbank.billet.service';
 
 @Module({
   controllers: [BilletController],

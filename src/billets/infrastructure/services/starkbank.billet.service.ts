@@ -1,7 +1,7 @@
-import { CreateBillet } from '../dto/create-billet.dto';
-import { CreateStarkBankBillet } from '../dto/create-starkbank-billet.dto';
-import { Billet } from '../entities/billet';
-import { BilletService } from './billet.service';
+import { CreateBillet } from '../../domain/dto/create-billet.dto';
+import { CreateStarkBankBillet } from '../../domain/dto/create-starkbank-billet.dto';
+import { Billet } from '../../domain/entities/billet';
+import { BilletService } from '../../domain/services/billet.service';
 import { boletoPayment } from 'starkbank';
 
 export class StarkbankBilletService extends BilletService {

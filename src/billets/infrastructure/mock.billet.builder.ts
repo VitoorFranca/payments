@@ -1,5 +1,5 @@
-import { CreateBillet } from './dto/create-billet.dto';
-import { CreateStarkBankBillet } from './dto/create-starkbank-billet.dto';
+import { CreateBillet } from '../domain/dto/create-billet.dto';
+import { CreateStarkBankBillet } from '../domain/dto/create-starkbank-billet.dto';
 import { cpf, cnpj } from 'cpf-cnpj-validator';
 export class MockBilletBuilder {
   static billet: any;

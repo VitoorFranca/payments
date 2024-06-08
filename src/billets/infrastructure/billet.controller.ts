@@ -1,7 +1,10 @@
 import { Controller, Body, Post, Inject } from '@nestjs/common';
-import { CreateBillet, CreateBilletInput } from './dto/create-billet.dto';
-import { Billet } from './entities/billet';
-import { BilletService } from './services/billet.service';
+import {
+  CreateBillet,
+  CreateBilletInput,
+} from '../domain/dto/create-billet.dto';
+import { Billet } from '../domain//entities/billet';
+import { BilletService } from '../domain/services/billet.service';
 
 @Controller('billets')
 export class BilletController {

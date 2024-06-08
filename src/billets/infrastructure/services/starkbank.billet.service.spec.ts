@@ -1,11 +1,11 @@
 import { Test } from '@nestjs/testing';
-import { StarkbankBilletService } from './starkbank.billet.service';
-import { BilletService } from './billet.service';
-import { CreateBillet } from '../dto/create-billet.dto';
-import { Billet } from '../entities/billet';
-import { CreateStarkBankBillet } from '../dto/create-starkbank-billet.dto';
+import { StarkbankBilletService } from '../../infrastructure/services/starkbank.billet.service';
+import { BilletService } from '../../domain/services/billet.service';
+import { CreateBillet } from '../../domain/dto/create-billet.dto';
+import { Billet } from '../../domain/entities/billet';
+import { CreateStarkBankBillet } from '../../domain/dto/create-starkbank-billet.dto';
 import { boletoPayment } from 'starkbank';
-import { MockBilletBuilder } from '../mock.billet.builder';
+import { MockBilletBuilder } from '../../infrastructure/mock.billet.builder';
 
 jest.mock('starkbank');
 
