@@ -15,8 +15,9 @@ export class StarkbankBilletService extends BilletService {
         receiverIdentity: billet.taxId,
         createdAt: billet.created,
       });
-    } catch (error) {
-      return error;
+    } catch (err) {
+      const error = JSON.parse(err.message);
+      throw error.errors[0];
     }
   }
 }

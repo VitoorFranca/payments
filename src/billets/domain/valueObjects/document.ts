@@ -1,4 +1,3 @@
-import { ValidationError } from 'class-validator';
 import { cpf, cnpj } from 'cpf-cnpj-validator';
 
 export class Document {
@@ -6,12 +5,7 @@ export class Document {
 
   constructor(document: string) {
     if (!this.isValid(document)) {
-      const validationError = new ValidationError();
-      validationError.contexts = {
-        status: '400',
-        errors: [{ status: 400, code: 'receiverIdentity' }],
-      };
-      throw validationError.contexts;
+      throw new Error('invalid document');
     }
 
     this.data = document;
