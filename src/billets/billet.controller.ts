@@ -11,6 +11,10 @@ export class BilletController {
 
   @Post()
   async create(@Body() createBilletDto: CreateBilletInput): Promise<Billet> {
-    return this.billetService.create(new CreateBillet(createBilletDto));
+    try {
+      return this.billetService.create(new CreateBillet(createBilletDto));
+    } catch (error) {
+      return error;
+    }
   }
 }
