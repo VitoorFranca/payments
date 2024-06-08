@@ -33,6 +33,7 @@ export class CreateBillet {
   @IsString()
   tags?: string;
 
+  @IsNotEmpty()
   @IsDateString()
   scheduledDate: string;
 
