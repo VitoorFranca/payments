@@ -1,3 +1,4 @@
+import { BadRequestException } from '@nestjs/common';
 import { CreateBillet } from '../../domain/dto/create-billet.dto';
 import { CreateStarkBankBillet } from '../../domain/dto/create-starkbank-billet.dto';
 import { Billet } from '../../domain/entities/billet';
@@ -17,7 +18,7 @@ export class StarkbankBilletService extends BilletService {
       });
     } catch (err) {
       const error = JSON.parse(err.message);
-      throw error.errors[0];
+      throw new BadRequestException(error.errors[0]);
     }
   }
 }
