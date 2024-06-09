@@ -11,7 +11,6 @@ import {
 } from '../domain/dto/create-billet.dto';
 import { Billet } from '../domain//entities/billet';
 import { BilletService } from '../domain/services/billet.service';
-import { ValidationError } from 'class-validator';
 
 @Controller('billets')
 export class BilletController {
@@ -20,22 +19,20 @@ export class BilletController {
   ) {}
 
   @Post()
-  async create(@Body() createBilletDto: CreateBilletInput): Promise<Billet> {
-    try {
-      const billet = await this.billetService.create(
-        new CreateBillet(createBilletDto),
-      );
-      return billet;
-    } catch (error) {
-      const validationError = new ValidationError();
+  async create(@Body() createBilletInput: CreateBilletInput): Promise<Billet> {
+    return this.billetService.create(this.buildBillet(createBilletInput));
+  }
 
-      validationError.contexts = {
-        status: '400',
+  private buildBillet(createBilletInput: CreateBilletInput): CreateBillet {
+    try {
+      const createBillet = new CreateBillet(createBilletInput);
+      return createBillet;
+    } catch (error) {
+      throw new BadRequestException({
+        code: 'invalid receiverIdentity',
         message: error.message,
         ...error,
-      };
-
-      throw new BadRequestException(validationError.contexts);
+      });
     }
   }
 }
