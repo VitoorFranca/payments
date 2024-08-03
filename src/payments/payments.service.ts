@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePaymentInvoiceDto } from './dto/create-payment-invoice.dto';
+import { CreatePaymentInvoiceDto } from './dto/create-payment-pix.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
 import { StarkbankService } from 'src/starkbank/starkbank.service';
 
@@ -7,12 +7,12 @@ import { StarkbankService } from 'src/starkbank/starkbank.service';
 export class PaymentsService {
   constructor(private starkBankService: StarkbankService) {}
 
-  create(createPaymentDto: CreatePaymentInvoiceDto) {
+  create({ data, method }: { data: CreatePaymentInvoiceDto; method: string }) {
     try {
-      console.log(createPaymentDto);
-      this.starkBankService.createInvoice({});
-
-      return 'This action adds a new payment';
+      console.log(data);
+      if (method === 'pix') {
+        return this.starkBankService.createInvoicePix(data);
+      }
     } catch (error) {
       console.log(error);
     }
