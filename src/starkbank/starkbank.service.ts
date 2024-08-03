@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import * as starkbank from 'starkbank';
 import { StarkbankConfig } from './interfaces/starkbank.config';
 import { STARKBANK_MODULE_CONFIG } from './constants/startkbank';
+import { CreatePaymentInvoiceDto } from 'src/payments/dto/create-payment-pix.dto';
 
 @Injectable()
 export class StarkbankService {
@@ -14,28 +15,28 @@ export class StarkbankService {
     this.starkbank.user = new starkbank.Project(this.starkbankConfig);
   }
 
-  async createInvoice(dto: any) {
+  async createInvoicePix(data: CreatePaymentInvoiceDto) {
     const response = await this.starkbank.invoice.create([
       {
-        amount: 400000,
-        taxId: '012.345.678-90',
-        name: 'Arya Stark',
+        amount: data.amount,
+        taxId: data.cpf,
+        name: `${data.firstName} ${data.lastName}`,
         expiration: 123456789,
         fine: 2.5,
         interest: 1.3,
-        tags: ['War supply', 'Invoice #1234'],
+        // tags: ['War supply', 'Invoice #1234'],
         descriptions: [
           {
             key: 'Arya',
             value: 'Not today',
           },
         ],
-        rules: [
-          {
-            key: 'allowedTaxIds',
-            value: ['012.345.678-90', '45.059.493/0001-73'],
-          },
-        ],
+        // rules: [
+        //   {
+        //     key: 'allowedTaxIds',
+        //     value: ['012.345.678-90', '45.059.493/0001-73'],
+        //   },
+        // ],
       },
     ] as any);
 

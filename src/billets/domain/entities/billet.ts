@@ -1,3 +1,4 @@
+
 import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { IBillet } from '../interfaces/Billet';
 import { Document } from '../valueObjects/document';
